@@ -1,5 +1,5 @@
 {
-  "name": "tailadmin-react-free",
+  "name": "Larecta-react-free",
   "private": true,
   "version": "1.3.8",
   "type": "module",
@@ -9,9 +9,9 @@
     "preview": "vite preview"
   },
   "author": {
-    "name": "TailAdmin",
-    "email": "hello@tailadmin.com",
-    "url": "https://tailadmin.com"
+    "name": "Larecta",
+    "email": "hello@Larecta.com",
+    "url": "https://Larecta.com"
   },
   "dependencies": {
     "apexcharts": "^3.41.0",
@@ -26,7 +26,8 @@
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.2",
     "react-toastify": "^9.1.3",
-    "sort-by": "^0.0.2"
+    "sort-by": "^0.0.2",
+    "sweetalert2": "^11.15.10"
   },
   "devDependencies": {
     "@types/react": "^18.2.17",
