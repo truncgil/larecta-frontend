@@ -16,6 +16,19 @@ import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import DefaultLayout from './layout/DefaultLayout';
+import Swal from 'sweetalert2';
+
+// Global Sweetalert2 yapılandırması
+const sweetAlert2Config = Swal.mixin({
+  customClass: {
+    confirmButton: 'bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors',
+    cancelButton: 'bg-bodydark1 text-white px-4 py-2 rounded-lg mr-2 hover:bg-bodydark1/90 transition-colors'
+  },
+  buttonsStyling: false // Sweetalert'in kendi stil özelliklerini devre dışı bırak
+});
+
+// Global olarak yapılandırmayı uygula
+window.Swal = sweetAlert2Config;
 
 window.API_URL = "http://localhost:8000/api";
 
@@ -50,7 +63,7 @@ function App() {
           index
           element={
             <>
-              <PageTitle title="Main Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Main Dashboard | Larecta - Tailwind CSS Admin Dashboard Template" />
               <Main />
             </>
           }
@@ -59,7 +72,7 @@ function App() {
           path="/calendar"
           element={
             <>
-              <PageTitle title="Calendar | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Calendar | Larecta - Tailwind CSS Admin Dashboard Template" />
               <Calendar />
             </>
           }
@@ -68,7 +81,7 @@ function App() {
           path="/profile"
           element={
             <>
-              <PageTitle title="Profile | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Profile | Larecta - Tailwind CSS Admin Dashboard Template" />
               <Profile />
             </>
           }
@@ -77,7 +90,7 @@ function App() {
           path="/forms/form-elements"
           element={
             <>
-              <PageTitle title="Form Elements | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Form Elements | Larecta - Tailwind CSS Admin Dashboard Template" />
               <FormElements />
             </>
           }
@@ -86,7 +99,7 @@ function App() {
           path="/forms/form-layout"
           element={
             <>
-              <PageTitle title="Form Layout | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Form Layout | Larecta - Tailwind CSS Admin Dashboard Template" />
               <FormLayout />
             </>
           }
@@ -95,7 +108,7 @@ function App() {
           path="/tables"
           element={
             <>
-              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Tables | Larecta - Tailwind CSS Admin Dashboard Template" />
               <Tables />
             </>
           }
@@ -104,7 +117,7 @@ function App() {
           path="/settings"
           element={
             <>
-              <PageTitle title="Settings | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Settings | Larecta - Tailwind CSS Admin Dashboard Template" />
               <Settings />
             </>
           }
@@ -113,7 +126,7 @@ function App() {
           path="/chart"
           element={
             <>
-              <PageTitle title="Basic Chart | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Basic Chart | Larecta - Tailwind CSS Admin Dashboard Template" />
               <Chart />
             </>
           }
@@ -122,7 +135,7 @@ function App() {
           path="/ui/alerts"
           element={
             <>
-              <PageTitle title="Alerts | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Alerts | Larecta - Tailwind CSS Admin Dashboard Template" />
               <Alerts />
             </>
           }
@@ -131,7 +144,7 @@ function App() {
           path="/ui/buttons"
           element={
             <>
-              <PageTitle title="Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Buttons | Larecta - Tailwind CSS Admin Dashboard Template" />
               <Buttons />
             </>
           }
@@ -140,7 +153,7 @@ function App() {
           path="/auth/signin"
           element={
             <>
-              <PageTitle title="Signin | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Signin | Larecta - Tailwind CSS Admin Dashboard Template" />
               <SignIn />
             </>
           }
@@ -149,7 +162,7 @@ function App() {
           path="/auth/signup"
           element={
             <>
-              <PageTitle title="Signup | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Signup | Larecta - Tailwind CSS Admin Dashboard Template" />
               <SignUp />
             </>
           }
