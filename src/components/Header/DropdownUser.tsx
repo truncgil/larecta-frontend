@@ -22,7 +22,8 @@ const DropdownUser = () => {
         });
 
         if (response.ok) {
-          const userData = await response.json();
+          const responseData = await response.json();
+          const userData = responseData.data;
           setUser({
             name: userData.name,
             role: userData.role,
