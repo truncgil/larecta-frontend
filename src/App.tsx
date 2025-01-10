@@ -12,11 +12,13 @@ import FormElements from './pages/Form/FormElements';
 import FormLayout from './pages/Form/FormLayout';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
+import PermissionSettings from './pages/PermissionSettings';
 import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import DefaultLayout from './layout/DefaultLayout';
 import Swal from 'sweetalert2';
+import { AuthProvider } from './contexts/AuthContext';
 
 // Global Sweetalert2 yapılandırması
 const sweetAlert2Config = Swal.mixin({
@@ -57,6 +59,8 @@ function App() {
   return loading ? (
     <Loader />
   ) : (
+    <AuthProvider>
+
     <DefaultLayout showSidebar={!CLEAN_PAGES.includes(pathname)}>
       <Routes>
         <Route
@@ -123,6 +127,15 @@ function App() {
           }
         />
         <Route
+          path="/permissions"
+          element={
+            <>
+              <PageTitle title="Settings | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PermissionSettings />
+            </>
+          }
+        />
+        <Route
           path="/chart"
           element={
             <>
@@ -169,6 +182,7 @@ function App() {
         />
       </Routes>
     </DefaultLayout>
+    </AuthProvider>
   );
 }
 
