@@ -1,0 +1,9 @@
+.swal2-confirm {
+  background-color: #3C50E0 !important; /* primary renginiz */
+  color: white !important;
+}
+
+.swal2-cancel {
+  background-color: #333A48 !important; /* bodydark1 renginiz */
+  color: white !important;
+} 
