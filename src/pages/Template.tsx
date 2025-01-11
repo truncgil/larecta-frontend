@@ -16,6 +16,7 @@ import DataGrid, {
   RequiredRule,
   StringLengthRule,
   TotalItem,
+  Lookup,
 } from 'devextreme-react/data-grid';
 import 'devextreme/dist/css/dx.light.css';
 import 'devextreme/data/odata/store';
@@ -29,11 +30,11 @@ const PermissionSettings = () => {
   // API store yapılandırması
   const permissionsStore = createStore({
     key: 'id',
-    loadUrl: `${API_URL}/permissions`,
-    insertUrl: `${API_URL}/permissions`,
-    updateUrl: `${API_URL}/permissions/`,
-    deleteUrl: `${API_URL}/permissions`,
-    onBeforeSend: (_method, ajaxOptions) => {
+    loadUrl: `${API_URL}/admin/contents`,
+    insertUrl: `${API_URL}/admin/contents`,
+    updateUrl: `${API_URL}/admin/contents/`,
+    deleteUrl: `${API_URL}/admin/contents`,
+    onBeforeSend: (_method: any, ajaxOptions) => {
       const token = localStorage.getItem('token');
 
       const id = ajaxOptions.data?.key; // Güncellenen veya silinen kaydın ID'si
@@ -41,10 +42,10 @@ const PermissionSettings = () => {
       console.log(ajaxOptions);
       // Update veya Delete için ID'yi URL'ye ekle
       if (ajaxOptions.method === 'PUT' && id) {
-        ajaxOptions.url = `${API_URL}/permissions/${id}`;
+        ajaxOptions.url = `${API_URL}/admin/contents/${id}`;
       }
       if (ajaxOptions.method === 'DELETE' && id) {
-        ajaxOptions.url = `${API_URL}/permissions/${id}`;
+        ajaxOptions.url = `${API_URL}/admin/contents/${id}`;
       }
       console.log(ajaxOptions);
 
@@ -55,47 +56,14 @@ const PermissionSettings = () => {
     },
   });
 
-  // Erişim kontrolü
-  if (user?.role !== 'super-admin') {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-danger">Erişim Reddedildi</h1>
-          <p className="mt-2 text-bodydark2">Bu sayfaya erişim yetkiniz bulunmamaktadır.</p>
-        </div>
-      </div>
-    );
-  }
+
 
   return (
     <>
-      <Breadcrumb pageName="Sistem Ayarları" />
+      <Breadcrumb pageName="Template" />
       
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-        <Tab.Group selectedIndex={activeTab} onChange={setActiveTab}>
-          <TabList className="flex border-b border-stroke px-4 dark:border-strokedark">
-            <Tab className={({ selected }) =>
-              `border-b-2 py-4 px-4 text-sm font-medium outline-none ${
-                selected
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-black hover:text-primary dark:text-white'
-              }`
-            }>
-              Rol ve İzin Yönetimi
-            </Tab>
-            <Tab className={({ selected }) =>
-              `border-b-2 py-4 px-4 text-sm font-medium outline-none ${
-                selected
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-black hover:text-primary dark:text-white'
-              }`
-            }>
-              Kullanıcı Rolleri
-            </Tab>
-          </TabList>
-
-          <Tab.Panels className="p-6">
-            <Tab.Panel>
+      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-6">
+       
               <DataGrid
                 dataSource={permissionsStore}
                 showBorders={true}
@@ -115,18 +83,32 @@ const PermissionSettings = () => {
                 <Grouping autoExpandAll={false} />
 
                 <Column dataField="id" caption="ID" allowEditing={false} />
-                <Column dataField="name" caption="İzin Adı">
-                  <RequiredRule message="İzin adı zorunludur" />
-                  <StringLengthRule max={50} message="İzin adı 50 karakterden uzun olamaz" />
+                <Column dataField="type" caption="İçerik Türü">
+                  <StringLengthRule max={255} message="İçerik türü 255 karakterden uzun olamaz" />
                 </Column>
-                <Column dataField="description" caption="Açıklama">
-                  <StringLengthRule max={200} message="Açıklama 200 karakterden uzun olamaz" />
+                <Column dataField="title" caption="Başlık">
+                  <RequiredRule message="Başlık alanı zorunludur" />
+                  <StringLengthRule max={255} message="Başlık 255 karakterden uzun olamaz" />
                 </Column>
-                <Column dataField="type" caption="Tür">
-                  <RequiredRule message="Tür alanı zorunludur" />
+                <Column dataField="slug" caption="URL">
+                  <RequiredRule message="URL alanı zorunludur" />
+                  <StringLengthRule max={255} message="URL 255 karakterden uzun olamaz" />
                 </Column>
+                <Column dataField="content" caption="İçerik" cellTemplate="contentTemplate">
+                  <StringLengthRule max={2000} message="İçerik 2000 karakterden uzun olamaz" />
+                </Column>
+                <Column dataField="meta" caption="Meta Veriler" cellTemplate="metaTemplate" />
                 <Column dataField="status" caption="Durum">
                   <RequiredRule message="Durum alanı zorunludur" />
+                  <Lookup
+                    dataSource={[
+                      { id: 'draft', text: 'Taslak' },
+                      { id: 'published', text: 'Yayında' },
+                      { id: 'archived', text: 'Arşivlenmiş' }
+                    ]}
+                    valueExpr="id"
+                    displayExpr="text"
+                  />
                 </Column>
 
                 <Summary>
@@ -136,12 +118,7 @@ const PermissionSettings = () => {
                   />
                 </Summary>
               </DataGrid>
-            </Tab.Panel>
-            <Tab.Panel>
-      
-            </Tab.Panel>
-          </Tab.Panels>
-        </Tab.Group>
+            
       </div>
     </>
   );
