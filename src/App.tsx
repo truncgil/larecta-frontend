@@ -30,7 +30,7 @@ const sweetAlert2Config = Swal.mixin({
 });
 
 // Global olarak yapılandırmayı uygula
-window.Swal = sweetAlert2Config;
+
 
 window.API_URL = "http://localhost:8000/api";
 
