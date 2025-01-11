@@ -17,6 +17,9 @@
     "@headlessui/react": "^2.2.0",
     "apexcharts": "^3.41.0",
     "axios": "^1.7.9",
+    "devextreme": "^24.2.3",
+    "devextreme-aspnet-data-nojquery": "^5.0.0",
+    "devextreme-react": "^24.2.3",
     "flatpickr": "^4.6.13",
     "headlessui": "^0.0.0",
     "jsvectormap": "^1.5.3",
@@ -29,7 +32,7 @@
     "react-router-dom": "^6.14.2",
     "react-toastify": "^9.1.3",
     "sort-by": "^0.0.2",
-    "sweetalert2": "^11.15.10"
+    "sweetalert2": "^11.6.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.17",
