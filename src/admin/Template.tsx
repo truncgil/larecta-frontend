@@ -1,9 +1,5 @@
-import { useState, useEffect } from 'react';
 import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
-import { Tab, TabList, TabPanel, TabPanels } from '@headlessui/react';
-//import UserRoles from './Settings/RoleModal';
-import { useAuth } from '../contexts/AuthContext';
-// DevExtreme importları
+
 import DataGrid, {
   Column,
   Editing,
@@ -21,7 +17,7 @@ import DataGrid, {
 import CustomStore from 'devextreme/data/custom_store';
 
 
-const PageSettings = () => {
+const Template = () => {
   //const { user } = useAuth();
   const token = localStorage.getItem('token');
 
@@ -71,7 +67,7 @@ const PageSettings = () => {
 
   return (
     <>
-      <Breadcrumb pageName="Template" />
+      <Breadcrumb pageName="Types" />
       
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-6">
        
@@ -115,4 +111,4 @@ const PageSettings = () => {
   );
 };
 
-export default PageSettings;
+export default Template;
