@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import 'material-icons/iconfont/material-icons.css';
+import 'devextreme/dist/css/dx.material.teal.light.css';
 
 import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
@@ -14,6 +16,7 @@ import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import PermissionSettings from './pages/PermissionSettings';
 import Template from './pages/Template';
+import Types from './admin/Types';
 import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
@@ -68,7 +71,7 @@ function App() {
           index
           element={
             <>
-              <PageTitle title="Main Dashboard | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Main Dashboard | Larecta - Content Management System" />
               <Main />
             </>
           }
@@ -77,7 +80,7 @@ function App() {
           path="/calendar"
           element={
             <>
-              <PageTitle title="Calendar | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Calendar | Larecta - Content Management System" />
               <Calendar />
             </>
           }
@@ -86,8 +89,17 @@ function App() {
           path="/admin/template"
           element={
             <>
-              <PageTitle title="Calendar | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Calendar | Larecta - Content Management System" />
               <Template />
+            </>
+          }
+        />
+        <Route
+          path="/admin/types"
+          element={
+            <>
+              <PageTitle title="Types | Larecta - Content Management System" />
+              <Types />
             </>
           }
         />
@@ -95,7 +107,7 @@ function App() {
           path="/profile"
           element={
             <>
-              <PageTitle title="Profile | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Profile | Larecta - Content Management System" />
               <Profile />
             </>
           }
@@ -104,7 +116,7 @@ function App() {
           path="/forms/form-elements"
           element={
             <>
-              <PageTitle title="Form Elements | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Form Elements | Larecta - Content Management System" />
               <FormElements />
             </>
           }
@@ -113,7 +125,7 @@ function App() {
           path="/forms/form-layout"
           element={
             <>
-              <PageTitle title="Form Layout | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Form Layout | Larecta - Content Management System" />
               <FormLayout />
             </>
           }
@@ -122,7 +134,7 @@ function App() {
           path="/tables"
           element={
             <>
-              <PageTitle title="Tables | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Tables | Larecta - Content Management System" />
               <Tables />
             </>
           }
@@ -131,7 +143,7 @@ function App() {
           path="/settings"
           element={
             <>
-              <PageTitle title="Settings | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Settings | Larecta - Content Management System" />
               <Settings />
             </>
           }
@@ -140,7 +152,7 @@ function App() {
           path="/permissions"
           element={
             <>
-              <PageTitle title="Settings | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Settings | Larecta - Content Management System" />
               <PermissionSettings />
             </>
           }
@@ -149,7 +161,7 @@ function App() {
           path="/chart"
           element={
             <>
-              <PageTitle title="Basic Chart | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Basic Chart | Larecta - Content Management System" />
               <Chart />
             </>
           }
@@ -158,7 +170,7 @@ function App() {
           path="/ui/alerts"
           element={
             <>
-              <PageTitle title="Alerts | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Alerts | Larecta - Content Management System" />
               <Alerts />
             </>
           }
@@ -167,7 +179,7 @@ function App() {
           path="/ui/buttons"
           element={
             <>
-              <PageTitle title="Buttons | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Buttons | Larecta - Content Management System" />
               <Buttons />
             </>
           }
@@ -176,7 +188,7 @@ function App() {
           path="/auth/signin"
           element={
             <>
-              <PageTitle title="Signin | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Signin | Larecta - Content Management System" />
               <SignIn />
             </>
           }
@@ -185,7 +197,7 @@ function App() {
           path="/auth/signup"
           element={
             <>
-              <PageTitle title="Signup | Larecta - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Signup | Larecta - Content Management System" />
               <SignUp />
             </>
           }
