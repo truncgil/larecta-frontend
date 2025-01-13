@@ -11,7 +11,7 @@ interface SidebarProps {
 
 interface TypeItem {
   id: number;
-  title: string;
+  name: string;
 }
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
