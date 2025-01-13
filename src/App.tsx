@@ -7,30 +7,23 @@ import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
-import Calendar from './pages/Calendar';
-import Chart from './pages/Chart';
-import Main from './pages/Dashboard/Main';
-import FormElements from './pages/Form/FormElements';
-import FormLayout from './pages/Form/FormLayout';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import PermissionSettings from './pages/PermissionSettings';
-import Template from './pages/Template';
+import Template from './admin/Template';
 import Types from './admin/Types';
-import Tables from './pages/Tables';
-import Alerts from './pages/UiElements/Alerts';
-import Buttons from './pages/UiElements/Buttons';
+
 import DefaultLayout from './layout/DefaultLayout';
 import Swal from 'sweetalert2';
 import { AuthProvider } from './contexts/AuthContext';
 
 // Global Sweetalert2 yapılandırması
-const sweetAlert2Config = Swal.mixin({
+Swal.mixin({
   customClass: {
     confirmButton: 'bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors',
     cancelButton: 'bg-bodydark1 text-white px-4 py-2 rounded-lg mr-2 hover:bg-bodydark1/90 transition-colors'
   },
-  buttonsStyling: false // Sweetalert'in kendi stil özelliklerini devre dışı bırak
+  buttonsStyling: false
 });
 
 // Global olarak yapılandırmayı uygula
@@ -67,29 +60,11 @@ function App() {
 
     <DefaultLayout showSidebar={!CLEAN_PAGES.includes(pathname)}>
       <Routes>
-        <Route
-          index
-          element={
-            <>
-              <PageTitle title="Main Dashboard | Larecta - Content Management System" />
-              <Main />
-            </>
-          }
-        />
-        <Route
-          path="/calendar"
-          element={
-            <>
-              <PageTitle title="Calendar | Larecta - Content Management System" />
-              <Calendar />
-            </>
-          }
-        />
-        <Route
+      <Route
           path="/admin/template"
           element={
             <>
-              <PageTitle title="Calendar | Larecta - Content Management System" />
+              <PageTitle title="Template | Larecta - Content Management System" />
               <Template />
             </>
           }
@@ -112,33 +87,7 @@ function App() {
             </>
           }
         />
-        <Route
-          path="/forms/form-elements"
-          element={
-            <>
-              <PageTitle title="Form Elements | Larecta - Content Management System" />
-              <FormElements />
-            </>
-          }
-        />
-        <Route
-          path="/forms/form-layout"
-          element={
-            <>
-              <PageTitle title="Form Layout | Larecta - Content Management System" />
-              <FormLayout />
-            </>
-          }
-        />
-        <Route
-          path="/tables"
-          element={
-            <>
-              <PageTitle title="Tables | Larecta - Content Management System" />
-              <Tables />
-            </>
-          }
-        />
+       
         <Route
           path="/settings"
           element={
@@ -157,33 +106,7 @@ function App() {
             </>
           }
         />
-        <Route
-          path="/chart"
-          element={
-            <>
-              <PageTitle title="Basic Chart | Larecta - Content Management System" />
-              <Chart />
-            </>
-          }
-        />
-        <Route
-          path="/ui/alerts"
-          element={
-            <>
-              <PageTitle title="Alerts | Larecta - Content Management System" />
-              <Alerts />
-            </>
-          }
-        />
-        <Route
-          path="/ui/buttons"
-          element={
-            <>
-              <PageTitle title="Buttons | Larecta - Content Management System" />
-              <Buttons />
-            </>
-          }
-        />
+        
         <Route
           path="/auth/signin"
           element={
