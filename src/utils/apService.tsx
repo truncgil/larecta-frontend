@@ -23,10 +23,13 @@ const apiRequest = async (url: string, method: string, data: any = null) => {
     return response.json();
   };
   
-  export const createCustomStore = (resource: string) => ({
+  export const createCustomStore = (resource: string, dataField?: string) => ({
     store: new CustomStore({
       key: 'id',
-      load: () => apiRequest(`${API_URL}/admin/${resource}`, 'GET'),
+      load: async () => {
+        const response = await apiRequest(`${API_URL}/admin/${resource}`, 'GET');
+        return dataField ? response[dataField] : response;
+      },
       update: (key, values) =>
         values ? apiRequest(`${API_URL}/admin/${resource}/${key}`, 'PUT', values) : Promise.reject('Güncellenecek veri bulunamadı'),
       remove: (key) => apiRequest(`${API_URL}/admin/${resource}/${key}`, 'DELETE'),
