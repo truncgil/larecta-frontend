@@ -1,12 +1,12 @@
-import CustomStore from 'devextreme/data/custom_store';
-const token = localStorage.getItem('token');
 // utils/apiService.js
+import CustomStore from 'devextreme/data/custom_store';
 const apiRequest = async (url: string, method: string, data: any = null) => {
+    const currentToken = localStorage.getItem('token');
     
     const options: RequestInit = {
       method,
       headers: {
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${currentToken}`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
