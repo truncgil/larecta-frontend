@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
+    "@material-symbols/svg-400": "^0.27.2",
     "apexcharts": "^3.41.0",
     "axios": "^1.7.9",
     "devextreme": "^24.2.3",
