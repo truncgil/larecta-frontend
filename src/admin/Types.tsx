@@ -13,7 +13,6 @@ import DataGrid, {
   RequiredRule,
   StringLengthRule,
   TotalItem,
-  
 } from 'devextreme-react/data-grid';
 import { createCustomStore } from '../utils/apService';
 
@@ -38,6 +37,28 @@ const Types = () => {
             const selectedRow = e.selectedRowsData[0];
             setSelectedTypeId(selectedRow?.id || null);
           }}
+          onEditorPreparing={(e) => {
+            if (e.dataField === 'name') {
+              e.editorOptions.onValueChanged = (args: any) => {
+                e.row.data.name = args.value;
+                e.row.data.slug = args.value
+                  .toLowerCase()
+                  
+                  .replace(/[ğ]/g, 'g')
+                  .replace(/[ı]/g, 'i') 
+                  .replace(/[ö]/g, 'o')
+                  .replace(/[ş]/g, 's')
+                  .replace(/[ü]/g, 'u')
+                  .replace(/[ç]/g, 'c')
+                  .replace(/\s+/g, '-')
+                  .replace(/-+/g, '-')
+                  
+                  .replace(/[\u0300-\u036f]/g, '') // Diacritics kaldır
+                  .replace(/[^a-z0-9\s-]/g, '')
+                  .trim();
+              };
+            }
+          }}
           selection={{ mode: 'single' }}
         >
           <FilterRow visible={true} />
@@ -57,6 +78,8 @@ const Types = () => {
             <RequiredRule message="Name field is required" />
             <StringLengthRule max={255} message="Name cannot be longer than 255 characters" />
           </Column>
+          <Column dataField="slug" caption="Slug" >
+            </Column>
           <Column dataField="description" caption="Description">
             <StringLengthRule max={255} message="Description cannot be longer than 255 characters" />
           </Column>
@@ -117,6 +140,7 @@ const Types = () => {
                 <RequiredRule message="Name alanı zorunludur" />
                 <StringLengthRule max={255} message="Name 255 karakterden uzun olamaz" />
               </Column>
+              
               <Column dataField="field_type" caption="Field Type" lookup={{
                 dataSource: [
                   { id: 'text', name: 'Text' },

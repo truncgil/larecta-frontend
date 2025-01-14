@@ -13,6 +13,7 @@ interface TypeItem {
   id: number;
   name: string;
   icon: string;
+  slug: string;
 }
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
@@ -120,7 +121,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {types.map((type) => (
                 <li key={type.id}>
                   <NavLink
-                    to={`/admin/type/${type.name}`}
+                    to={`/admin/type/${type.slug}`}
                     className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                       pathname.includes(`type/${type.id}`) && 'bg-graydark dark:bg-meta-4'
                     }`}
