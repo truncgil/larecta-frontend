@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import SidebarLinkGroup from './SidebarLinkGroup';
+//import SidebarLinkGroup from './SidebarLinkGroup';
 import Logo from '../../images/logo/logo.svg';
 import axios from 'axios';
 
@@ -12,6 +12,7 @@ interface SidebarProps {
 interface TypeItem {
   id: number;
   name: string;
+  icon: string;
 }
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
@@ -124,7 +125,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       pathname.includes(`type/${type.id}`) && 'bg-graydark dark:bg-meta-4'
                     }`}
                   >
-                    <span className="material-icons">folder</span>
+                    <span className="material-icons">{type.icon}</span>
                     {type.name}
                   </NavLink>
                 </li>
