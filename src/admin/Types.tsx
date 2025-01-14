@@ -14,56 +14,12 @@ import DataGrid, {
   TotalItem,
   
 } from 'devextreme-react/data-grid';
-import CustomStore from 'devextreme/data/custom_store';
+import { createCustomStore } from '../utils/apService';
 
 
 const Types = () => {
-  //const { user } = useAuth();
-  const token = localStorage.getItem('token');
 
-  const typeStore = {
-    store: new CustomStore({
-      key: 'id',
-      load: () => {
-        return fetch(`${API_URL}/admin/types`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }).then(response => response.json());
-      },
-      update: (key, values) => {
-        return fetch(`${API_URL}/admin/types/${key}`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(values)
-        });
-      },
-      remove: (key) => {
-        return fetch(`${API_URL}/admin/types/${key}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }).then(() => void 0);
-      },
-      insert: (values) => {
-        return fetch(`${API_URL}/admin/types`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(values)
-        });
-      }
-    })
-  };
-  
+  const typeStore = createCustomStore('types');
 
   return (
     <>
@@ -82,7 +38,7 @@ const Types = () => {
                 <GroupPanel visible={true} />
                 <Scrolling mode="virtual" />
                 <Editing
-                  mode="popup"
+                  mode="batch"
                   allowUpdating={true}
                   allowDeleting={true}
                   allowAdding={true}
@@ -96,6 +52,31 @@ const Types = () => {
                 </Column>
                 <Column dataField="description" caption="Description">
                   <StringLengthRule max={255} message="Description cannot be longer than 255 characters" />
+                </Column>
+                <Column dataField="icon" caption="Icon" cellRender={(cellData) => {
+                  console.log(cellData.value);
+                    return (
+                      <div className="flex items-center gap-2">
+                        <span className="material-icons">{cellData.value}</span>
+                        <span>{cellData.value}</span>
+                      </div>
+                    );
+                  }}>
+                 
+                </Column>
+                <Column dataField="status" caption="Status" lookup={{
+                  dataSource: [
+                    { id: 'active', name: 'Active' },
+                    { id: 'inactive', name: 'Inactive' },
+                    { id: 'pending', name: 'Pending' }
+                  ],
+                  displayExpr: 'name',
+                  valueExpr: 'id'
+                }}>
+                  <RequiredRule message="Yayınlanma durumu seçilmesi zorunludur" />
+                </Column>
+                <Column dataField="order" caption="Order" dataType="number">
+                  <RequiredRule message="Order field is required" />
                 </Column>
 
                 <Summary>
