@@ -14,56 +14,13 @@ import DataGrid, {
   TotalItem,
   
 } from 'devextreme-react/data-grid';
-import CustomStore from 'devextreme/data/custom_store';
+import { createCustomStore } from '../utils/apService';
 
 
 const Template = () => {
   //const { user } = useAuth();
-  const token = localStorage.getItem('token');
 
-  const typeStore = {
-    store: new CustomStore({
-      key: 'id',
-      load: () => {
-        return fetch(`${API_URL}/admin/types`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }).then(response => response.json());
-      },
-      update: (key, values) => {
-        return fetch(`${API_URL}/admin/types/${key}`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(values)
-        });
-      },
-      remove: (key) => {
-        return fetch(`${API_URL}/admin/types/${key}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }).then(() => void 0);
-      },
-      insert: (values) => {
-        return fetch(`${API_URL}/admin/types`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(values)
-        });
-      }
-    })
-  };
-  
+  const typeStore = createCustomStore('types');
 
   return (
     <>
@@ -82,7 +39,7 @@ const Template = () => {
                 <GroupPanel visible={true} />
                 <Scrolling mode="virtual" />
                 <Editing
-                  mode="popup"
+                  mode="batch"
                   allowUpdating={true}
                   allowDeleting={true}
                   allowAdding={true}
