@@ -12,6 +12,7 @@ import Settings from './pages/Settings';
 import PermissionSettings from './pages/PermissionSettings';
 import Template from './admin/Template';
 import Types from './admin/Types';
+import Contents from './admin/Contents';
 
 import DefaultLayout from './layout/DefaultLayout';
 import Swal from 'sweetalert2';
@@ -60,12 +61,21 @@ function App() {
 
     <DefaultLayout showSidebar={!CLEAN_PAGES.includes(pathname)}>
       <Routes>
-      <Route
+        <Route
           path="/admin/template"
           element={
             <>
               <PageTitle title="Template | Larecta - Content Management System" />
               <Template />
+            </>
+          }
+        />
+        <Route
+          path="/admin/contents"
+          element={
+            <>
+              <PageTitle title="Contents | Larecta - Content Management System" />
+              <Contents />
             </>
           }
         />
