@@ -27,7 +27,7 @@ const Contents = () => {
 
   return (
     <>
-      <Breadcrumb pageName="İçerikler" />
+      <Breadcrumb pageName="Contents" />
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-6">
         <DataGrid
           dataSource={contentsStore}
@@ -48,41 +48,41 @@ const Contents = () => {
           <Grouping autoExpandAll={false} />
 
           <Column dataField="id" caption="ID" allowEditing={false} />
-          <Column dataField="title" caption="Başlık">
-            <RequiredRule message="Başlık alanı zorunludur" />
-            <StringLengthRule max={255} message="Başlık 255 karakterden uzun olamaz" />
+          <Column dataField="title" caption="Title">
+            <RequiredRule message="Title field is required" />
+            <StringLengthRule max={255} message="Title cannot be longer than 255 characters" />
           </Column>
           <Column dataField="slug" caption="URL">
-            <RequiredRule message="URL alanı zorunludur" />
-            <StringLengthRule max={255} message="URL 255 karakterden uzun olamaz" />
+            <RequiredRule message="URL field is required" />
+            <StringLengthRule max={255} message="URL cannot be longer than 255 characters" />
           </Column>
-          <Column dataField="type" caption="Tip" lookup={createLookupStore('types', 'name', 'slug')}>
-            <RequiredRule message="Tip alanı zorunludur" />
+          <Column dataField="type" caption="Type" lookup={createLookupStore('types', 'name', 'slug')}>
+            <RequiredRule message="Type is required" />
           </Column>
-          <Column dataField="status" caption="Durum" lookup={{
+          <Column dataField="status" caption="Status" lookup={{
             dataSource: [
-              { id: 'draft', name: 'Taslak' },
-              { id: 'published', name: 'Yayında' },
-              { id: 'pending', name: 'Beklemede' }
+              { id: 'draft', name: 'Draft' },
+              { id: 'published', name: 'Published' },
+              { id: 'archived', name: 'Archived' }
             ],
             displayExpr: 'name',
             valueExpr: 'id'
           }}>
-            <RequiredRule message="Durum alanı zorunludur" />
+            <RequiredRule message="Status field is required" />
           </Column>
-          <Column dataField="parent_id" caption="Üst İçerik" />
-          <Column dataField="order" caption="Sıra" dataType="number">
-            <RequiredRule message="Sıra alanı zorunludur" />
+          <Column dataField="parent_id" caption="Parent Content" />
+          <Column dataField="order" caption="Order" dataType="number">
+            <RequiredRule message="Order field is required" />
           </Column>
 
           <Column
             width={110}
-            caption="İşlemler"
+            caption="Actions"
             cellRender={(cellData: any) => {
               return (
                   <Button
                     icon="edit"
-                    hint="Düzenle"
+                    hint="Edit"
                     onClick={() => handleEdit({ row: { data: cellData.data } })}
                   />
                  
@@ -100,4 +100,3 @@ const Contents = () => {
 };
 
 export default Contents;
-
