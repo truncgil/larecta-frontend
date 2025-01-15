@@ -1,8 +1,9 @@
 // utils/apiService.js
 import CustomStore from 'devextreme/data/custom_store';
 
-const apiRequest = async (url: string, method: string, data: any = null) => {
+export const apiRequest = async (url: string, method: string, data: any = null) => {
     const currentToken = localStorage.getItem('token');
+    const fullUrl = `${API_URL}${url}`;
     
     const options: RequestInit = {
       method,
@@ -16,7 +17,7 @@ const apiRequest = async (url: string, method: string, data: any = null) => {
       ...(data && { body: JSON.stringify(data) }),
     };
   
-    const response = await fetch(url, options);
+    const response = await fetch(fullUrl, options);
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.message || 'API request failed');
@@ -28,13 +29,26 @@ const apiRequest = async (url: string, method: string, data: any = null) => {
     store: new CustomStore({
       key: 'id',
       load: async () => {
-        const response = await apiRequest(`${API_URL}/admin/${resource}`, 'GET');
+        const response = await apiRequest(`/admin/${resource}`, 'GET');
         return dataField ? response[dataField] : response;
       },
       update: (key, values) =>
-        values ? apiRequest(`${API_URL}/admin/${resource}/${key}`, 'PUT', values) : Promise.reject('Güncellenecek veri bulunamadı'),
-      remove: (key) => apiRequest(`${API_URL}/admin/${resource}/${key}`, 'DELETE'),
-      insert: (values) => apiRequest(`${API_URL}/admin/${resource}`, 'POST', values),
+        values ? apiRequest(`/admin/${resource}/${key}`, 'PUT', values) : Promise.reject('Güncellenecek veri bulunamadı'),
+      remove: (key) => apiRequest(`/admin/${resource}/${key}`, 'DELETE'),
+      insert: (values) => apiRequest(`/admin/${resource}`, 'POST', values),
+    }),
+  });
+  export const createCustomStore2 = (resource: string, getResource: string) => ({
+    store: new CustomStore({
+      key: 'id',
+      load: async () => {
+        const response = await apiRequest(`/admin/${getResource}`, 'GET');
+        return response;
+      },
+      update: (key, values) =>
+        values ? apiRequest(`/admin/${resource}/${key}`, 'PUT', values) : Promise.reject('Güncellenecek veri bulunamadı'),
+      remove: (key) => apiRequest(`/admin/${resource}/${key}`, 'DELETE'),
+      insert: (values) => apiRequest(`/admin/${resource}`, 'POST', values),
     }),
   });
 
@@ -47,7 +61,7 @@ const apiRequest = async (url: string, method: string, data: any = null) => {
         store: new CustomStore({
           key: valueExpr,
           load: async () => {
-            const response = await apiRequest(`${API_URL}/admin/${resource}`, 'GET');
+            const response = await apiRequest(`/admin/${resource}`, 'GET');
             cachedData = response; // Verileri cache'le
             return response;
           },
@@ -82,7 +96,17 @@ export interface Content {
 // Content yükleme fonksiyonu
 export const loadContent = async (id: string | number): Promise<ContentResponse> => {
   try {
-    const data = await apiRequest(`${API_URL}/admin/contents/${id}`, 'GET');
+    const data = await apiRequest(`/admin/contents/${id}`, 'GET');
+    return data;
+  } catch (error) {
+    console.error('İçerik yüklenirken hata:', error);
+    throw error;
+  }
+};
+
+export const loadData = async (type: string | number): Promise<ContentResponse> => {
+  try {
+    const data = await apiRequest(`/admin/${type}`, 'GET');
     return data;
   } catch (error) {
     console.error('İçerik yüklenirken hata:', error);
@@ -93,7 +117,7 @@ export const loadContent = async (id: string | number): Promise<ContentResponse>
 // Content güncelleme fonksiyonu
 export const updateContent = async (id: string | number, data: Content): Promise<Content> => {
   try {
-    const updatedData = await apiRequest(`${API_URL}/admin/contents/${id}`, 'PUT', data);
+    const updatedData = await apiRequest(`/admin/contents/${id}`, 'PUT', data);
     return updatedData;
   } catch (error) {
     console.error('İçerik güncellenirken hata:', error);
