@@ -14,10 +14,12 @@ import Template from './admin/Template';
 import Types from './admin/Types';
 import Contents from './admin/Contents';
 import ContentEdit from './admin/ContentEdit';
+import SpecificContents from './admin/SpecificContents';
 
 import DefaultLayout from './layout/DefaultLayout';
 import Swal from 'sweetalert2';
 import { AuthProvider } from './contexts/AuthContext';
+
 
 // Global Sweetalert2 yapılandırması
 Swal.mixin({
@@ -86,6 +88,15 @@ function App() {
             <>
               <PageTitle title="Contents | Larecta - Content Management System" />
               <ContentEdit />
+            </>
+          }
+        />
+        <Route
+          path="/admin/type/:typeName"
+          element={
+            <>
+              <PageTitle title=":typeName | Larecta - Content Management System" />
+              <SpecificContents />
             </>
           }
         />
