@@ -37,6 +37,7 @@ const Types = () => {
             const selectedRow = e.selectedRowsData[0];
             setSelectedTypeId(selectedRow?.id || null);
           }}
+          /*
           onEditorPreparing={(e) => {
             if (e.dataField === 'name') {
               e.editorOptions.onValueChanged = (args: any) => {
@@ -60,7 +61,9 @@ const Types = () => {
                 }
               };
             }
+              
           }}
+            */
           selection={{ mode: 'single' }}
         >
           <FilterRow visible={true} />
