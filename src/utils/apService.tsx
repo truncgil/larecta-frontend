@@ -36,4 +36,27 @@ const apiRequest = async (url: string, method: string, data: any = null) => {
       insert: (values) => apiRequest(`${API_URL}/admin/${resource}`, 'POST', values),
     }),
   });
-  
+
+  export const createLookupStore = (resource: string, displayExpr: string = 'name', valueExpr: string = 'id') => {
+    let cachedData: any[] = [];
+
+    return {
+      dataSource: {
+        paginate: false,
+        store: new CustomStore({
+          key: valueExpr,
+          load: async () => {
+            const response = await apiRequest(`${API_URL}/admin/${resource}`, 'GET');
+            cachedData = response; // Verileri cache'le
+            return response;
+          },
+          byKey: (key) => {
+            // Cache'den ilgili kaydı bul
+            return Promise.resolve(cachedData.find(item => item.id === key));
+          }
+        })
+      },
+      displayExpr: displayExpr,
+      valueExpr: valueExpr
+    };
+  };
