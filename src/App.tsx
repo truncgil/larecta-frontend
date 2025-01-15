@@ -13,6 +13,7 @@ import PermissionSettings from './pages/PermissionSettings';
 import Template from './admin/Template';
 import Types from './admin/Types';
 import Contents from './admin/Contents';
+import ContentEdit from './admin/ContentEdit';
 
 import DefaultLayout from './layout/DefaultLayout';
 import Swal from 'sweetalert2';
@@ -76,6 +77,15 @@ function App() {
             <>
               <PageTitle title="Contents | Larecta - Content Management System" />
               <Contents />
+            </>
+          }
+        />
+        <Route
+          path="/admin/contents/edit/:id"
+          element={
+            <>
+              <PageTitle title="Contents | Larecta - Content Management System" />
+              <ContentEdit />
             </>
           }
         />
