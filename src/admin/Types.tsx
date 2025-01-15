@@ -40,22 +40,24 @@ const Types = () => {
           onEditorPreparing={(e) => {
             if (e.dataField === 'name') {
               e.editorOptions.onValueChanged = (args: any) => {
-                e.row.data.name = args.value;
-                e.row.data.slug = args.value
-                  .toLowerCase()
-                  
-                  .replace(/[ğ]/g, 'g')
-                  .replace(/[ı]/g, 'i') 
-                  .replace(/[ö]/g, 'o')
-                  .replace(/[ş]/g, 's')
-                  .replace(/[ü]/g, 'u')
-                  .replace(/[ç]/g, 'c')
-                  .replace(/\s+/g, '-')
-                  .replace(/-+/g, '-')
-                  
-                  .replace(/[\u0300-\u036f]/g, '') // Diacritics kaldır
-                  .replace(/[^a-z0-9\s-]/g, '')
-                  .trim();
+                if (e.row) {
+                  e.row.data.name = args.value;
+                  e.row.data.slug = args.value
+                    .toLowerCase()
+                    
+                    .replace(/[ğ]/g, 'g')
+                    .replace(/[ı]/g, 'i') 
+                    .replace(/[ö]/g, 'o')
+                    .replace(/[ş]/g, 's')
+                    .replace(/[ü]/g, 'u')
+                    .replace(/[ç]/g, 'c')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    
+                    .replace(/[\u0300-\u036f]/g, '') // Diacritics kaldır
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .trim();
+                }
               };
             }
           }}
