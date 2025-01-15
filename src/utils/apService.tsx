@@ -1,5 +1,6 @@
 // utils/apiService.js
 import CustomStore from 'devextreme/data/custom_store';
+
 const apiRequest = async (url: string, method: string, data: any = null) => {
     const currentToken = localStorage.getItem('token');
     
@@ -60,3 +61,42 @@ const apiRequest = async (url: string, method: string, data: any = null) => {
       valueExpr: valueExpr
     };
   };
+
+// Content için tip tanımı
+
+interface ContentResponse {
+  content: Content;
+}
+
+export interface Content {
+  id?: number;
+  title: string;
+  content: string;
+  slug?: string;
+  type?: string;
+  status?: string;
+  parent_id?: number;
+  order?: number;
+}
+
+// Content yükleme fonksiyonu
+export const loadContent = async (id: string | number): Promise<ContentResponse> => {
+  try {
+    const data = await apiRequest(`${API_URL}/admin/contents/${id}`, 'GET');
+    return data;
+  } catch (error) {
+    console.error('İçerik yüklenirken hata:', error);
+    throw error;
+  }
+};
+
+// Content güncelleme fonksiyonu
+export const updateContent = async (id: string | number, data: Content): Promise<Content> => {
+  try {
+    const updatedData = await apiRequest(`${API_URL}/admin/contents/${id}`, 'PUT', data);
+    return updatedData;
+  } catch (error) {
+    console.error('İçerik güncellenirken hata:', error);
+    throw error;
+  }
+};
