@@ -14,14 +14,13 @@ import DataGrid, {
   TotalItem,
   
 } from 'devextreme-react/data-grid';
-import { createCustomStore } from '../utils/apService';
+import { createCustomStore2, createLookupStore } from '../utils/apService';
 
 
 const Template = () => {
   //const { user } = useAuth();
 
-  const specificTypeStore = createCustomStore(`contents/type/${window.location.pathname.split('/').pop()}`);
-
+  const specificTypeStore = createCustomStore2('contents',`contents/type/${window.location.pathname.split('/').pop()}`);
   return (
     <>
       <Breadcrumb pageName="Types" />
@@ -29,7 +28,7 @@ const Template = () => {
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-6">
        
               <DataGrid
-                dataSource={typeStore}
+                dataSource={specificTypeStore}
                 showBorders={true}
                 remoteOperations={false}
                 height={600}
@@ -55,9 +54,7 @@ const Template = () => {
                   <RequiredRule message="URL field is required" />
                   <StringLengthRule max={255} message="URL cannot be longer than 255 characters" />
                 </Column>
-                <Column dataField="type" caption="Type">
-                  <RequiredRule message="Type field is required" />
-                </Column>
+              
                 <Column dataField="status" caption="Durum" lookup={{
                   dataSource: [
                     { id: 'draft', name: 'Draft' },
