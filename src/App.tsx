@@ -61,7 +61,7 @@ function App() {
     <Loader />
   ) : (
     <AuthProvider>
-
+      
     <DefaultLayout showSidebar={!CLEAN_PAGES.includes(pathname)}>
       <Routes>
         <Route
@@ -95,7 +95,8 @@ function App() {
           path="/admin/type/:typeName"
           element={
             <>
-              <PageTitle title=":typeName | Larecta - Content Management System" />
+            
+              <PageTitle title="Larecta - Content Management System" />
               <SpecificContents />
             </>
           }
