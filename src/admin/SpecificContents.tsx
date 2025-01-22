@@ -30,12 +30,14 @@ const SpecificContents = () => {
   useEffect(() => {
     const fetchTypeInfo = async () => {
       const result = await apiRequest(`/admin/types/${typeName}`, 'GET');
-     
+      document.title = result.name;
       setContentType(result);
     };
     
     fetchTypeInfo();
   }, [typeName]);
+
+
 
   const handleEdit = (e: any) => {
     navigate(`/admin/contents/edit/${e.row.data.id}`);
