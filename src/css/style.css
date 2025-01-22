@@ -213,3 +213,6 @@ span.flatpickr-weekday,
 [x-cloak] {
   display: none !important;
 }
+.swal2-container {
+  z-index: 100000;
+}
